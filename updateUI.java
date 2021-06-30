@@ -59,15 +59,21 @@ public class updateUI implements Option {
                 case 1:
                     refactorCell(tableColSize * gaussianI + gaussianK,page,cellOrange,opaque);
                     code.setText(codes.part1);
+                    if(opaque)
+                        pane.getVerticalScrollBar().setValue(0);
                     break;
                 case 2:
                     refactorCell(tableColSize * gaussianK + index_max,page,cellOrange,opaque);
                     code.setText(codes.part2);
+                    if(opaque)
+                        pane.getVerticalScrollBar().setValue(0);
                     break;
                 case 3:
                     refactorCell(tableColSize * gaussianI + gaussianK,page,cellOrange,opaque);
                     refactorCell(tableColSize * gaussianJ + gaussianK,page,cellRed,opaque);
                     code.setText(codes.part3);
+                    if(opaque)
+                        pane.getVerticalScrollBar().setValue(8);
                     break;
                 case 4:
                     refactorCell(tableColSize * gaussianI + gaussianJ,page,cellOrange,opaque);
@@ -75,11 +81,14 @@ public class updateUI implements Option {
                     refactorCell(tableColSize * gaussianI + gaussianK,page,cellBlue,opaque);
                     refactorCell(tableColSize * gaussianK + gaussianK,page,cellYellow,opaque);
                     code.setText(codes.part4);
-                    pane.getVerticalScrollBar().setValue(66);
+                    if(opaque)
+                        pane.getVerticalScrollBar().setValue(66);
                     break;
                 case 5:
                     refactorCell(tableColSize * gaussianI + gaussianK,page,cellBlue,opaque);
                     code.setText(codes.part5);
+                    if(opaque)
+                        pane.getVerticalScrollBar().setValue(195);
                     break;
             }
         }
@@ -89,21 +98,26 @@ public class updateUI implements Option {
                     refactorCell(tableColSize * gaussianI + tableRowSize,page,cellOrange,opaque);
                     refactorCellSols(gaussianI,page,cellRed,opaque);
                     code.setText(codes.part6);
+                    if(opaque)
+                        pane.getVerticalScrollBar().setValue(8);
                     break;
                 case 2:
                     refactorCell(tableColSize * gaussianI + gaussianJ,page,cellOrange,opaque);
                     refactorCellSols(gaussianI,page,cellRed,opaque);
                     refactorCellSols(gaussianJ,page,cellYellow,opaque);
                     code.setText(codes.part7);
+                    if(opaque)
+                        pane.getVerticalScrollBar().setValue(57);
                     break;
                 case 3:
                     refactorCell(tableColSize * gaussianI + gaussianI,page,cellOrange,opaque);
                     refactorCellSols(gaussianI,page,cellRed,opaque);
                     code.setText(codes.part8);
+                    if(opaque)
+                        pane.getVerticalScrollBar().setValue(86);
                     break;
             }
         }
-        pane.getVerticalScrollBar().setValue(66);
     }
     public void refactorCell(int index, int page, Color color, boolean opaque ){
 

@@ -41,7 +41,7 @@ public class Codes {
             "mso-themeshade:191;mso-style-textfill-fill-color:#AFABAB;mso-style-textfill-fill-themecolor:\n" +
             "background2;mso-style-textfill-fill-alpha:100.0%;mso-style-textfill-fill-colortransforms:\n" +
             "lumm=75000'>//Create a multiplier for equation<br>\n" +
-            "<span style='mso-spacerun:yes'>    </span>//to make the lower triangle to be zero<br>\n" +
+            "<span style='mso-spacerun:yes'>    </span>//to make the lower triangle set to zero<br>\n" +
             "</span><span style='font-family:Consolas;color:white;mso-themecolor:background1'><span style='mso-spacerun:yes'>    </span>double Multiplier = </span><span\n" +
             "style='font-family:Consolas;color:#4043F5'>mat[i][k] </span><span\n" +
             "style='font-family:Consolas;color:white;mso-themecolor:background1'>/ </span><span\n" +
@@ -70,7 +70,7 @@ public class Codes {
             "color:#AFABAB;mso-themecolor:background2;mso-themeshade:191;mso-style-textfill-fill-color:\n" +
             "#AFABAB;mso-style-textfill-fill-themecolor:background2;mso-style-textfill-fill-alpha:\n" +
             "100.0%;mso-style-textfill-fill-colortransforms:lumm=75000'>//Create a multiplier for equation<br>\n" +
-            "<span style='mso-spacerun:yes'>    </span>//to make the lower triangle to be zero<br>\n" +
+            "<span style='mso-spacerun:yes'>    </span>//to make the lower triangle set to zero<br>\n" +
             "</span><span style='font-family:Consolas;color:white;mso-themecolor:background1'><span style='mso-spacerun:yes'>    </span>double Multiplier = mat[i][k] / mat[k][k];<br>\n" +
             "<span style='mso-spacerun:yes'>    </span>for (int j = k + 1; j &lt;= Unknowns; j++) {<br>\n" +
             "<span style='mso-spacerun:yes'>        </span>mat[i][j] -= mat[k][j] * Multiplier;<br>\n" +

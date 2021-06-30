@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 
 public class informationPanel implements Option{
     private JPanel information;
@@ -17,7 +19,7 @@ public class informationPanel implements Option{
         Title.setForeground(cellYellow);
 
         //Setup ScrollPane Options
-        scrollPane = new JScrollPane(code);
+        scrollPane = new JScrollPane(code,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setPreferredSize(new Dimension(0,0));
         scrollPane.setBackground(cellBlack);
         scrollPane.getVerticalScrollBar().setUI(new cJScrollPaneUI(cellYellow,cellBlack,cellYellow,"\u25BD","\u25B3"));
@@ -27,9 +29,7 @@ public class informationPanel implements Option{
         scrollPane.getVerticalScrollBar().setUnitIncrement(20);
 
         //Set Default Code display in Information Panel
-        Codes codes = new Codes();
         code.setContentType("text/html");
-        code.setText(codes.part1);
         code.setBackground(cellGray);
 
         GridBagConstraints informationConst = ui.constraints(GridBagConstraints.BOTH,1,1);
