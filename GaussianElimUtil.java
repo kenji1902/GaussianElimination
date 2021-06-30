@@ -39,34 +39,25 @@ public class GaussianElimUtil {
     }
     // function to get matrix content
     public void gaussianElimination() {
-        /* reduction into r.e.f. */
         int singular_flag = forwardElim(mat);
-
-        /* if matrix is singular */
         if (singular_flag != -1) {
             JOptionPane.showMessageDialog(null,"Please provide another Input\n"+"Matrix is Singular" ,"Solution",JOptionPane.WARNING_MESSAGE);
-
-      /* if the RHS of equation corresponding to
-               zero row  is 0, * system has infinitely
-               many solutions, else inconsistent*/
             if (mat[singular_flag][Unknowns] != 0)
                 JOptionPane.showMessageDialog(null,"Please provide another Input\n"+"Inconsistent System" ,"Solution",JOptionPane.WARNING_MESSAGE);
             else
                 JOptionPane.showMessageDialog(null,"Please provide another Input\n"+"May have infinite Solutions" ,"Solution",JOptionPane.WARNING_MESSAGE);
             return;
         }
-    /* get solution to system and print it using
-           backward substitution */
         backSub(mat);
     }
-    // function to reduce matrix to r.e.f.
+
     private int forwardElim(double mat[][]) {
         for (int k = 0; k < Unknowns; k++) {
             // Initialize maximum value and index for pivot
             int index_max = k;
             int value_max = (int)mat[index_max][k];
 
-            /* find greater amplitude for pivot if any */
+            // get the Highest Value in Row
             for (int i = k + 1; i < Unknowns; i++) {
                 if (Math.abs(mat[i][k]) > value_max) {
                     value_max = (int) mat[i][k];
@@ -88,17 +79,15 @@ public class GaussianElimUtil {
                 swap_row(mat, k, index_max);
             }
             for (int i = k + 1; i < Unknowns; i++) {
-                /* factor to set current row kth element
-                 * to 0, and subsequently remaining kth
-                 * column to 0 */
-                double factor = mat[i][k] / mat[k][k];
+                //Create a multiplier for equation
+                //to make the lower triangle to be zero
+                double Multiplier = mat[i][k] / mat[k][k];
                 for (int j = k + 1; j <= Unknowns; j++) {
-                    mat[i][j] -= mat[k][j] * factor;
-                    steps.add(new gaussianSteps(Arrays.stream(mat).map(row -> Arrays.stream(row).boxed().toArray(Double[]::new)).toArray(Double[][]::new)
+                    mat[i][j] -= mat[k][j] * Multiplier;
+                    steps.  add(new gaussianSteps(Arrays.stream(mat).map(row -> Arrays.stream(row).boxed().toArray(Double[]::new)).toArray(Double[][]::new)
                             ,null,i,j,k,index_max,value_max,true,false,4));
                 }
-                /* filling lower triangular matrix with
-                 * zeros*/
+                //set the Current lower triangle to Zero
                 mat[i][k] = 0;
                 steps.add(new gaussianSteps(Arrays.stream(mat).map(row -> Arrays.stream(row).boxed().toArray(Double[]::new)).toArray(Double[][]::new)
                         ,null,i,0,k,index_max,value_max,true,false,5));
@@ -110,8 +99,6 @@ public class GaussianElimUtil {
     private void backSub(double mat[][]) {
         double Solution[] = new double[Unknowns]; // An array to store solution
 
-    /* Start calculating from last equation up to the
-           first */
         for (int i = Unknowns - 1; i >= 0; i--) {
             /* start with the RHS of the equation */
             Solution[i] = mat[i][Unknowns];
@@ -123,19 +110,11 @@ public class GaussianElimUtil {
                         ,Arrays.stream( Solution ).boxed().toArray( Double[]::new ),i,j,0,0,0,false,true,2));
             }
 
-      /* divide the RHS by the coefficient of the
-               unknown being calculated */
             Solution[i] = Solution[i] / mat[i][i];
             steps.add(new gaussianSteps(Arrays.stream(mat).map(row -> Arrays.stream(row).boxed().toArray(Double[]::new)).toArray(Double[][]::new)
                     ,Arrays.stream( Solution ).boxed().toArray( Double[]::new ),i,0,0,0,0,false,true,3));
         }
 
-//        System.out.println();
-//        System.out.println("Solution for the system:");
-//        for (int i = 0; i < N; i++) {
-//            System.out.format("%.6f", Solution[i]);
-//            System.out.println();
-//        }
     }
     private void swap_row(double mat[][], int i, int j) {
         for (int k = 0; k <= Unknowns; k++) {
