@@ -8,6 +8,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class updateUI implements Option {
 
@@ -20,10 +28,13 @@ public class updateUI implements Option {
     private JFrame mainframe;
 
     private boolean acceptinput;
+    private Timer play;
     private int tableColSize;
     private int tableRowSize;
     private int page;
     private int prevpage;
+
+    private int randomTaskCount;
 
     updateUI(){
         try {
@@ -35,6 +46,7 @@ public class updateUI implements Option {
         }catch (Exception err){
             System.out.println(err.getMessage());
         }
+        randomTaskCount = 0;
         page = 0;
         prevpage = 0;
         acceptinput = false;
@@ -174,8 +186,10 @@ public class updateUI implements Option {
             if(colSize < str.length)
                 colSize = str.length;
 
-        if(colSize < 3)
-            colSize = 3;
+        if(rowSize < 2)
+            throw new Exception("Row must be greater than 2");
+        if(colSize <= 3)
+            throw new Exception("Col must be greater than 3");
 
         double[][] container = new double[rowSize][colSize];
         for(int i = 0; i < matrix.length;i++)
@@ -186,6 +200,42 @@ public class updateUI implements Option {
 
     }
 
+    public double[][] getRand(String array) throws Exception{
+        String[] line = array.split(" ");
+        Pattern pattern = Pattern.compile("\n");
+        Matcher matcher = pattern.matcher(array);
+        if(matcher.find()){
+            throw new Exception("Input Format (Random):\nRow Min Max\nMin = Minimum Value of Random\nMax = Maximum Value of Random");
+        }
+        if(line.length != 3)
+            throw new Exception("Input Format (Random):\nRow Min Max\nMin = Minimum Value of Random\nMax = Maximum Value of Random");
+
+
+        int Row = Integer.parseInt(line[0]);
+        int Col = Row + 1;
+        float min = Integer.parseInt(line[1]);
+        float max = Integer.parseInt(line[2]);
+
+        if(Row < 2 || Row > 40)
+            throw new Exception("Row must be greater than 1 and Less than or equal to 40");
+        if(min >= max)
+            throw new Exception("min must be less than max");
+
+        double[][] random = new double[Row][Col];
+        for(int i = 0; i < Row; i++){
+            for(int j = 0; j < Col; j++){
+                float Val = (float) Math.floor(Math.random() * (max - min + 1) + min);
+                random[i][j] = Val;
+            }
+        }
+        for(double[] y : random){
+            for(double x : y){
+                System.out.print(x+" ");
+            }
+            System.out.println();
+        }
+        return random;
+    }
 
     //Gridbag constraints Utitlity
     public GridBagConstraints constraints(int fill, float weightx, float weighty){
@@ -260,7 +310,20 @@ public class updateUI implements Option {
 
     public void setInput(inputPanel inputPanel){this.input = inputPanel;}
 
+    public void setRandomTaskCount(int value) {this.randomTaskCount = value;}
+
+    public void setPlay(TimerTask task) {
+        if(play != null)
+            play.cancel();
+
+        play = new Timer();
+        play.schedule(task, 0, 100);
+    }
     //Getter
+    public void CancelPlay() {
+        if(play != null)
+            play.cancel();
+    }
 
     public informationPanel getInformation() {
         return information;
@@ -285,4 +348,9 @@ public class updateUI implements Option {
     }
 
     public JFrame getFrame() {return mainframe;}
+
+    public int getRandomTaskCount() {
+        return randomTaskCount;
+    }
+
 }

@@ -38,15 +38,15 @@ public class GaussianElimUtil {
         steps = new LinkedList<>();
     }
     // function to get matrix content
-    public void gaussianElimination() {
+    public void gaussianElimination() throws Exception{
         int singular_flag = forwardElim(mat);
         if (singular_flag != -1) {
-            JOptionPane.showMessageDialog(null,"Please provide another Input\n"+"Matrix is Singular" ,"Solution",JOptionPane.WARNING_MESSAGE);
+            String flag = "";
             if (mat[singular_flag][Unknowns] != 0)
-                JOptionPane.showMessageDialog(null,"Please provide another Input\n"+"Inconsistent System" ,"Solution",JOptionPane.WARNING_MESSAGE);
+                flag = "Matrix is Singular Inconsistent System";
             else
-                JOptionPane.showMessageDialog(null,"Please provide another Input\n"+"May have infinite Solutions" ,"Solution",JOptionPane.WARNING_MESSAGE);
-            return;
+                flag = "Matrix is Singular May have infinite Solutions";
+            throw new Exception(flag);
         }
         backSub(mat);
     }

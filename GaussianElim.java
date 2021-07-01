@@ -53,21 +53,21 @@ public class GaussianElim implements Option{
         //Information Panel
         ui.constraints(frameConst,informationWeightx,informationWeighty);
         information.Setup(ui);
-        ui.setInformation(information);
+
         mainPanel.add(information.getPanel(),frameConst);
 
         //Table Panel
         ui.constraints(frameConst,0,1,3,1);
         ui.constraints(frameConst,tableWeightx,tableWeighty);
         table.setup(ui);
-        ui.setTable(table);
+
         mainPanel.add(table.getPanel(),frameConst);
 
         //Code Panel
         ui.constraints(frameConst,2,0,1,1);
         ui.constraints(frameConst,codeWeightx,codeWeighty);
         input.setup(ui);
-        ui.setInput(input);
+
         mainPanel.add(input.getPanel(),frameConst);
 
         //Show mainFrame

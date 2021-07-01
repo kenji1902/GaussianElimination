@@ -6,6 +6,7 @@ public class tablePanel implements Option{
     private JPanel table;
     private JPanel GTable;
     private JPanel STable;
+    private JPanel Buttons;
 
     tablePanel(JPanel table){
         this.table = table;
@@ -65,37 +66,53 @@ public class tablePanel implements Option{
 
 
         //Buttons
-        JPanel Buttons = new JPanel(new GridBagLayout());
+        Buttons = new JPanel(new GridBagLayout());
         Buttons.setBackground(cellBlack);
-        CButton prev = new CButton("<<",SwingConstants.CENTER);
-        CButton next = new CButton(">>",SwingConstants.CENTER);
-        CButton equal = new CButton("=",SwingConstants.CENTER);
+        CButton first = new CButton("<<",SwingConstants.CENTER);
+        CButton prev = new CButton("<",SwingConstants.CENTER);
+        CButton next = new CButton(">",SwingConstants.CENTER);
+        CButton equal = new CButton(">>",SwingConstants.CENTER);
+        CButton play = new CButton("\u25B6",SwingConstants.CENTER);
+        CButton stop = new CButton("\u23F9",SwingConstants.CENTER);
+        play.setFont(new Font("Arial Unicode MS",Font.PLAIN,10));
+        stop.setFont(new Font("Arial Unicode MS",Font.PLAIN,10));
 
         //Button Option
         Dimension buttonSize = new Dimension(80,20);
+        first.setMinimumSize(buttonSize);
         prev.setMinimumSize(buttonSize);
         next.setMinimumSize(buttonSize);
         equal.setMinimumSize(buttonSize);
+        play.setMinimumSize(buttonSize);
+        stop.setMinimumSize(buttonSize);
 
         //Setup Button
+        first.setActionCommand(String.valueOf(buttonId.first));
         prev.setActionCommand(String.valueOf(buttonId.prev));
         next.setActionCommand(String.valueOf(buttonId.next));
         equal.setActionCommand(String.valueOf(buttonId.equal));
+        play.setActionCommand(String.valueOf(buttonId.play));
+        stop.setActionCommand(String.valueOf(buttonId.stop));
+
+        first.addActionListener(new onClickListener(ui));
         prev.addActionListener(new onClickListener(ui));
         next.addActionListener(new onClickListener(ui));
         equal.addActionListener(new onClickListener(ui));
+        play.addActionListener(new onClickListener(ui));
+        stop.addActionListener(new onClickListener(ui));
 
-        GridBagConstraints buttonConst = ui.constraints(GridBagConstraints.BOTH,0.33f,1);
+        GridBagConstraints buttonConst = ui.constraints(GridBagConstraints.BOTH,1,1);
         JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
         separator.setForeground(cellBlack);
         separator.setBackground(cellBlack);
+        Buttons.add(first,buttonConst);
         Buttons.add(prev,buttonConst);
         Buttons.add(next,buttonConst);
         Buttons.add(equal,buttonConst);
+        Buttons.add(play,buttonConst);
+        Buttons.add(stop,buttonConst);
 
         GridBagConstraints colConst = ui.constraints(GridBagConstraints.BOTH,1,1);
-        ui.constraints(colConst,0,GridBagConstraints.RELATIVE,2,1);
-        colIndex.add(Buttons,colConst);
 
         JPanel colNums = new JPanel(new GridLayout(1,tableColSize));
         colNums.setBackground(cellBlack);
@@ -156,11 +173,15 @@ public class tablePanel implements Option{
         colIndex.add(sols,colConst);
 
 
-        GridBagConstraints tableConst = ui.constraints(GridBagConstraints.BOTH,1,1);
         JPanel tableContainer = new JPanel(new GridBagLayout());
         tableContainer.setPreferredSize(new Dimension(0,0));
-        tableContainer.add(jScrollPane,tableConst);
         tableContainer.setName("tableContainer");
+
+        GridBagConstraints tableConst = ui.constraints(GridBagConstraints.BOTH,1,0.01f);
+        ui.constraints(tableConst,0,GridBagConstraints.RELATIVE,1,1);
+        tableContainer.add(Buttons,tableConst);
+        ui.constraints(tableConst,1,0.99f);
+        tableContainer.add(jScrollPane,tableConst);
         table.add(tableContainer,tableConst);
 
         ui.setTable(this);
@@ -182,4 +203,5 @@ public class tablePanel implements Option{
     public JPanel getSTable() {
         return STable;
     }
+    public JPanel getButtons() {return Buttons; }
 }

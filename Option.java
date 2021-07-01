@@ -27,7 +27,10 @@ public interface Option {
         next,
         prev,
         equal,
+        first,
+        play,
+        stop,
         calculate,
-        dynButton
+        random
     }
 }

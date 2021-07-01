@@ -34,6 +34,7 @@ public class informationPanel implements Option{
 
         GridBagConstraints informationConst = ui.constraints(GridBagConstraints.BOTH,1,1);
         information.add(scrollPane,informationConst);
+        ui.setInformation(this);
     }
     public JPanel getPanel(){
         return information;
