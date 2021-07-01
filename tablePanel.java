@@ -122,6 +122,7 @@ public class tablePanel implements Option{
         Dimension rowSize = new Dimension(40,50);
         Dimension colSize = new Dimension(50,20);
 
+        char[] variable = {'x','y','z'};
         for(int i = 0; i < tableRowSize; i++){
             for(int j = 0; j < tableColSize; j++){
                 //Value of Table
@@ -139,7 +140,11 @@ public class tablePanel implements Option{
                     rowIndex.add(rowLabel, rowConst);
                 }
                 if(i == 0){
-                    JLabel colLabel = new JLabel(String.valueOf(j),JLabel.CENTER);
+                    JLabel colLabel = null;
+                    if(j != tableColSize-1)
+                        colLabel = new JLabel(variable[j%3]+String.valueOf(j),JLabel.CENTER);
+                    else
+                        colLabel = new JLabel(String.valueOf(j),JLabel.CENTER);
                     colLabel.setPreferredSize(colSize);
                     colLabel.setForeground(cellWhite);
                     colNums.add(colLabel);
