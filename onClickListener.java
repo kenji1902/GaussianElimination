@@ -156,10 +156,14 @@ public class onClickListener implements ActionListener {
                     geninBG.execute();
                 break;
         }
-        System.out.println("part: "+gaussian.steps.get(page).part);
-        System.out.println("Prev Page >> "+prevpage);
-        System.out.println("Page >> "+page);
-        System.out.println("Random Task Count: "+ui.getRandomTaskCount());
+        try {
+            System.out.println("part: " + gaussian.steps.get(page).part);
+            System.out.println("Prev Page >> " + prevpage);
+            System.out.println("Page >> " + page);
+            System.out.println("Random Task Count: " + ui.getRandomTaskCount());
+        }catch (Exception err){
+            System.out.println(err.getMessage());
+        }
     }
     void genRandom(){
         inputPanel input = ui.getInputPanel();

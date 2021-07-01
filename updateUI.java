@@ -216,8 +216,8 @@ public class updateUI implements Option {
         float min = Integer.parseInt(line[1]);
         float max = Integer.parseInt(line[2]);
 
-        if(Row < 2 || Row > 40)
-            throw new Exception("Row must be greater than 1 and Less than or equal to 40");
+        if(Row < 2 || Row > 45)
+            throw new Exception("Row must be greater than 1 and Less than or equal to 45");
         if(min >= max)
             throw new Exception("min must be less than max");
 
