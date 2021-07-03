@@ -144,7 +144,7 @@ public class tablePanel implements Option{
                     if(j != tableColSize-1)
                         colLabel = new JLabel(variable[j%3]+String.valueOf(j),JLabel.CENTER);
                     else
-                        colLabel = new JLabel(String.valueOf(j),JLabel.CENTER);
+                        colLabel = new JLabel("Constant",JLabel.CENTER);
                     colLabel.setPreferredSize(colSize);
                     colLabel.setForeground(cellWhite);
                     colNums.add(colLabel);
