@@ -60,9 +60,6 @@ public class inputPanel implements Option {
             }
         };
         Random.setBorder(BorderFactory.createLineBorder(cellBlack));
-
-
-        System.out.println(System.getProperty("user.dir")+"\\resource\\random.png");
         GridBagConstraints c = ui.constraints(GridBagConstraints.BOTH,1,0.80f);
         ui.constraints(c,0,GridBagConstraints.RELATIVE,2,1);
         inputPanel.add(jScrollPane,c);
