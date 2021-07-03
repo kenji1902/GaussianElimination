@@ -36,9 +36,8 @@ public class GaussianElim implements Option{
         table = new tablePanel(new JPanel(new GridBagLayout()));
         input = new inputPanel(new JPanel(new GridBagLayout()));
         information = new informationPanel(new JPanel(new GridBagLayout()));
-        setup();
     }
-    private void setup(){
+    public void setup(){
         //Setup MainFrame
         JFrame mainFrame = new JFrame(title);
         mainFrame.setSize(width,height);
@@ -73,6 +72,8 @@ public class GaussianElim implements Option{
         //Show mainFrame
         mainFrame.add(mainPanel);
         mainFrame.setVisible(true);
+        mainFrame.repaint();
+        mainFrame.revalidate();
         ui.setFrame(mainFrame);
     }
 }

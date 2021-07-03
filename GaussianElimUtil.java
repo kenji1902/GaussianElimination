@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -50,7 +51,6 @@ public class GaussianElimUtil {
         }
         backSub(mat);
     }
-
     private int forwardElim(double mat[][]) {
         for (int k = 0; k < Unknowns; k++) {
             // Initialize maximum value and index for pivot

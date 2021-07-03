@@ -150,9 +150,12 @@ public class tablePanel implements Option{
                     colNums.add(colLabel);
 
                 }
+
+
                 data.setBorder(BorderFactory.createLineBorder(cellBlack));
                 data.setPreferredSize(cellSize);
                 GTable.add(data);
+                GTable.getComponent(0);
             }
         }
         for(int j = 0; j < tableRowSize; j++){

@@ -15,14 +15,12 @@ public class inputPanel implements Option {
     private JPanel information;
     private JPanel inputPanel;
     private TextPlaceHolder input;
-    private updateUI ui;
 
     inputPanel(JPanel inputPanel){
         this.inputPanel = inputPanel;
     }
 
-    public void setup(updateUI Ui){
-        this.ui = Ui;
+    public void setup(updateUI ui){
         page = ui.getPage();
         prevpage = ui.getPrevpage();
         table = ui.getTable().getPanel();
@@ -42,17 +40,23 @@ public class inputPanel implements Option {
         Calculate.setBorder(BorderFactory.createLineBorder(cellBlack));
         Image img = null;
         try {
-            img = ImageIO.read(new File(System.getProperty("user.dir")+"\\src\\resource\\random.png")).getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
+            img = ImageIO.read(new File(System.getProperty("user.dir")+"\\resource\\random.png")).getScaledInstance(20, 20, Image.SCALE_AREA_AVERAGING);
         } catch (IOException e) {
             e.printStackTrace();
         }
         Image finalImg = img;
         CButton Random = new CButton("",SwingConstants.CENTER){
             @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2 = (Graphics2D) g;
-                g2.drawImage(finalImg,(this.getWidth() - finalImg.getWidth(null))/2,(this.getHeight() - finalImg.getHeight(null))/2,this);
+            protected void paintComponent(Graphics g2) {
+                super.paintComponent(g2);
+                Graphics2D g = (Graphics2D) g2;
+                g.setPaint(cellYellow);
+                try{
+                    g2.drawImage(finalImg,(this.getWidth() - finalImg.getWidth(null))/2,(this.getHeight() - finalImg.getHeight(null))/2,this);
+                }
+                catch (Exception e) {
+                    g.drawString("R", ((getWidth() - g.getFontMetrics().stringWidth("A")) / 2), ((g.getFontMetrics().getMaxAscent() + getHeight()) / 2) - 1);
+                }
             }
         };
         Random.setBorder(BorderFactory.createLineBorder(cellBlack));
